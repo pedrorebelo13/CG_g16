@@ -1,0 +1,102 @@
+<cone>
+  <triangle>
+    <vertex x='1' y='0' z='0'/>
+    <vertex x='-4.37114e-08' y='0' z='1'/>
+    <vertex x='0.666667' y='0.666667' z='0'/>
+  </triangle>
+  <triangle>
+    <vertex x='-4.37114e-08' y='0' z='1'/>
+    <vertex x='-2.91409e-08' y='0.666667' z='0.666667'/>
+    <vertex x='0.666667' y='0.666667' z='0'/>
+  </triangle>
+  <triangle>
+    <vertex x='-4.37114e-08' y='0' z='1'/>
+    <vertex x='-1' y='0' z='-8.74228e-08'/>
+    <vertex x='-2.91409e-08' y='0.666667' z='0.666667'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='0' z='-8.74228e-08'/>
+    <vertex x='-0.666667' y='0.666667' z='-5.82818e-08'/>
+    <vertex x='-2.91409e-08' y='0.666667' z='0.666667'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='0' z='-8.74228e-08'/>
+    <vertex x='1.19249e-08' y='0' z='-1'/>
+    <vertex x='-0.666667' y='0.666667' z='-5.82818e-08'/>
+  </triangle>
+  <triangle>
+    <vertex x='1.19249e-08' y='0' z='-1'/>
+    <vertex x='7.94992e-09' y='0.666667' z='-0.666667'/>
+    <vertex x='-0.666667' y='0.666667' z='-5.82818e-08'/>
+  </triangle>
+  <triangle>
+    <vertex x='1.19249e-08' y='0' z='-1'/>
+    <vertex x='1' y='0' z='1.74846e-07'/>
+    <vertex x='7.94992e-09' y='0.666667' z='-0.666667'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='0' z='1.74846e-07'/>
+    <vertex x='0.666667' y='0.666667' z='1.16564e-07'/>
+    <vertex x='7.94992e-09' y='0.666667' z='-0.666667'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.666667' y='0.666667' z='0'/>
+    <vertex x='-2.91409e-08' y='0.666667' z='0.666667'/>
+    <vertex x='0.333333' y='1.33333' z='0'/>
+  </triangle>
+  <triangle>
+    <vertex x='-2.91409e-08' y='0.666667' z='0.666667'/>
+    <vertex x='-1.45705e-08' y='1.33333' z='0.333333'/>
+    <vertex x='0.333333' y='1.33333' z='0'/>
+  </triangle>
+  <triangle>
+    <vertex x='-2.91409e-08' y='0.666667' z='0.666667'/>
+    <vertex x='-0.666667' y='0.666667' z='-5.82818e-08'/>
+    <vertex x='-1.45705e-08' y='1.33333' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.666667' y='0.666667' z='-5.82818e-08'/>
+    <vertex x='-0.333333' y='1.33333' z='-2.91409e-08'/>
+    <vertex x='-1.45705e-08' y='1.33333' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.666667' y='0.666667' z='-5.82818e-08'/>
+    <vertex x='7.94992e-09' y='0.666667' z='-0.666667'/>
+    <vertex x='-0.333333' y='1.33333' z='-2.91409e-08'/>
+  </triangle>
+  <triangle>
+    <vertex x='7.94992e-09' y='0.666667' z='-0.666667'/>
+    <vertex x='3.97496e-09' y='1.33333' z='-0.333333'/>
+    <vertex x='-0.333333' y='1.33333' z='-2.91409e-08'/>
+  </triangle>
+  <triangle>
+    <vertex x='7.94992e-09' y='0.666667' z='-0.666667'/>
+    <vertex x='0.666667' y='0.666667' z='1.16564e-07'/>
+    <vertex x='3.97496e-09' y='1.33333' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.666667' y='0.666667' z='1.16564e-07'/>
+    <vertex x='0.333333' y='1.33333' z='5.82818e-08'/>
+    <vertex x='3.97496e-09' y='1.33333' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='0' y='0' z='0'/>
+    <vertex x='1' y='0' z='0'/>
+    <vertex x='-4.37114e-08' y='0' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0' y='0' z='0'/>
+    <vertex x='-4.37114e-08' y='0' z='1'/>
+    <vertex x='-1' y='0' z='-8.74228e-08'/>
+  </triangle>
+  <triangle>
+    <vertex x='0' y='0' z='0'/>
+    <vertex x='-1' y='0' z='-8.74228e-08'/>
+    <vertex x='1.19249e-08' y='0' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0' y='0' z='0'/>
+    <vertex x='1.19249e-08' y='0' z='-1'/>
+    <vertex x='1' y='0' z='1.74846e-07'/>
+  </triangle>
+</cone>
