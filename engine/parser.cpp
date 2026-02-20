@@ -83,9 +83,7 @@ void SimpleParser::parseModels(XMLElement* modelsElement, Group& group) {
         const char* filename = modelElement->Attribute("file");
         if (filename) {
             Model model;
-            // Adicionar o prefixo da pasta generator/files3d/ ao nome do ficheiro
-            // Funciona tanto quando executado a partir da raiz do projeto como da pasta engine
-            model.filename = "generator/files3d/" + std::string(filename);
+            model.filename = std::string(filename);
             group.models.push_back(model);
             
             cout << "Model found: " << model.filename << endl;
