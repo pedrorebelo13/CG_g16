@@ -1,0 +1,8 @@
+--exemplo de como correr. output: esfera--
+/CG_916$ cd generator
+CG_g16/generator$ g++ generator.cpp -o generator 
+CG_916/generator$ ./generator sphere 1 10 10 sphere.3d 
+/CG_916/generator$ cd ..
+/CG_916$ cd engine
+/CG_916/engine$ g++ engine.cpp camera.cpp parser.cpp tinyxml2.cpp -o engine -lglut -lGL -IGLU
+/CG_916/engine$ ./engine ../xmlfiles/test_1_5.xml 
