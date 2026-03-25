@@ -57,7 +57,8 @@ struct ModelData {
 
 Window window;                              ///< Dimensões da janela de visualização
 Camera* camera;                             ///< Ponteiro para a câmera da cena
-vector<ModelData> modelDataList;            ///< Lista de todos os modelos carregados
+Group sceneRootGroup;                       ///< Grupo raiz da cena com hierarquia completa
+map<string, ModelData> modelDataMap;        ///< Cache de modelos carregados por referência
 
 bool showAxes = false;                      ///< Flag para mostrar/esconder eixos coordenados
 bool wireframeMode = false;                 ///< Flag para ativar/desativar modo wireframe
@@ -72,6 +73,12 @@ bool wireframeMode = false;                 ///< Flag para ativar/desativar modo
  * @return true se carregado com sucesso, false caso contrário
  */
 bool loadModel(ModelData& modelData, const string& filename);
+bool fileExists(const string& path);
+string resolveModelPath(const string& modelFile, const string& configFilePath);
+void collectModelReferences(const Group& group, vector<string>& modelRefs);
+void applyTransformation(const Transformation& transformation);
+void drawModel(const ModelData& modelData);
+void renderGroup(const Group& group);
 
 /**
  * @brief Callback GLUT para redimensionamento da janela.
@@ -146,23 +153,34 @@ int main(int argc, char** argv) {
         return 1;
     }
     
-    // Carrega todos os modelos especificados no arquivo XML
+    sceneRootGroup = group;
+
+    // Carrega todos os modelos especificados na hierarquia do arquivo XML
     cout << "\nCarregando modelos..." << endl;
-    for (const Model& model : group.models) {
+    vector<string> modelRefs;
+    collectModelReferences(sceneRootGroup, modelRefs);
+
+    for (const string& modelRef : modelRefs) {
+        if (modelDataMap.find(modelRef) != modelDataMap.end()) {
+            continue;
+        }
+
+        string resolvedPath = resolveModelPath(modelRef, argv[1]);
         ModelData modelData;
-        if (loadModel(modelData, model.filename)) {
-            modelDataList.push_back(modelData);
+        if (loadModel(modelData, resolvedPath)) {
+            modelDataMap[modelRef] = modelData;
         } else {
-            cerr << "Aviso: falha ao carregar modelo: " << model.filename << endl;
+            cerr << "Aviso: falha ao carregar modelo: " << modelRef << endl;
         }
     }
-    
-    if (modelDataList.empty()) {
+
+    if (modelDataMap.empty()) {
         cerr << "Erro: nenhum modelo foi carregado com sucesso." << endl;
         return 1;
     }
-    
-    cout << "\nTotal de modelos carregados com sucesso: " << modelDataList.size() << endl;
+
+    cout << "\nTotal de referências de modelos na cena: " << modelRefs.size() << endl;
+    cout << "Total de modelos únicos carregados com sucesso: " << modelDataMap.size() << endl;
     
         
     // Inicializa GLUT com argumentos da linha de comando
@@ -347,6 +365,140 @@ bool loadModel(ModelData& modelData, const string& filename) {
     return true;
 }
 
+
+bool fileExists(const string& path) {
+    ifstream file(path);
+    return file.good();
+}
+
+
+string resolveModelPath(const string& modelFile, const string& configFilePath) {
+    if (fileExists(modelFile)) {
+        return modelFile;
+    }
+
+    size_t lastSlashPos = configFilePath.find_last_of("/\\");
+    if (lastSlashPos != string::npos) {
+        string configDir = configFilePath.substr(0, lastSlashPos);
+        string fromConfigDir = configDir + "/" + modelFile;
+        if (fileExists(fromConfigDir)) {
+            return fromConfigDir;
+        }
+    }
+
+    string fromGeneratorDir = "../generator/files3d/" + modelFile;
+    if (fileExists(fromGeneratorDir)) {
+        return fromGeneratorDir;
+    }
+
+    string fromWorkspaceRootGeneratorDir = "generator/files3d/" + modelFile;
+    if (fileExists(fromWorkspaceRootGeneratorDir)) {
+        return fromWorkspaceRootGeneratorDir;
+    }
+
+    return modelFile;
+}
+
+
+void collectModelReferences(const Group& group, vector<string>& modelRefs) {
+    for (const Model& model : group.models) {
+        modelRefs.push_back(model.filename);
+    }
+
+    for (const Group& child : group.children) {
+        collectModelReferences(child, modelRefs);
+    }
+}
+
+
+void applyTransformation(const Transformation& transformation) {
+    switch (transformation.type) {
+        case TRANSLATE:
+            glTranslatef(transformation.x, transformation.y, transformation.z);
+            break;
+        case ROTATE:
+            glRotatef(transformation.angle, transformation.x, transformation.y, transformation.z);
+            break;
+        case SCALE:
+            glScalef(transformation.x, transformation.y, transformation.z);
+            break;
+    }
+}
+
+
+void drawModel(const ModelData& modelData) {
+    if (!modelData.loaded) {
+        return;
+    }
+
+    if (!modelData.faces.empty()) {
+        glBegin(GL_TRIANGLES);
+        for (const Face& face : modelData.faces) {
+            static int colorToggleFaces = 0;
+            if (colorToggleFaces % 2 == 0) {
+                glColor3f(0.8f, 0.6f, 0.2f);
+            } else {
+                glColor3f(0.2f, 0.6f, 0.8f);
+            }
+            colorToggleFaces++;
+
+            const Vertex& v1 = modelData.vertices[face.v1];
+            const Vertex& v2 = modelData.vertices[face.v2];
+            const Vertex& v3 = modelData.vertices[face.v3];
+
+            glVertex3f(v1.x, v1.y, v1.z);
+            glVertex3f(v2.x, v2.y, v2.z);
+            glVertex3f(v3.x, v3.y, v3.z);
+        }
+        glEnd();
+        return;
+    }
+
+    glBegin(GL_TRIANGLES);
+    for (size_t i = 0; i < modelData.vertices.size(); i += 3) {
+        if (i + 2 < modelData.vertices.size()) {
+            static int colorToggleVertices = 0;
+            if (colorToggleVertices % 2 == 0) {
+                glColor3f(0.8f, 0.6f, 0.2f);
+            } else {
+                glColor3f(0.2f, 0.6f, 0.8f);
+            }
+            colorToggleVertices++;
+
+            const Vertex& v1 = modelData.vertices[i];
+            const Vertex& v2 = modelData.vertices[i + 1];
+            const Vertex& v3 = modelData.vertices[i + 2];
+
+            glVertex3f(v1.x, v1.y, v1.z);
+            glVertex3f(v2.x, v2.y, v2.z);
+            glVertex3f(v3.x, v3.y, v3.z);
+        }
+    }
+    glEnd();
+}
+
+
+void renderGroup(const Group& group) {
+    glPushMatrix();
+
+    for (const Transformation& transformation : group.transformations) {
+        applyTransformation(transformation);
+    }
+
+    for (const Model& model : group.models) {
+        auto it = modelDataMap.find(model.filename);
+        if (it != modelDataMap.end()) {
+            drawModel(it->second);
+        }
+    }
+
+    for (const Group& child : group.children) {
+        renderGroup(child);
+    }
+
+    glPopMatrix();
+}
+
 /**
  * @brief Desenha os eixos coordenados X, Y, Z na origem em cores padrão.
  *
@@ -438,63 +590,8 @@ void renderScene() {
         drawAxes();
     }
     
-    // Renderiza todos os modelos carregados
-    for (const ModelData& modelData : modelDataList) {
-        // Ignora modelos não carregados
-        if (!modelData.loaded) continue;
-        
-        // Se o modelo tem faces definidas, usa-as para renderização
-        if (!modelData.faces.empty()) {
-            glBegin(GL_TRIANGLES);
-            
-            // Renderiza cada face (triângulo) do modelo
-            for (const Face& face : modelData.faces) {
-                // Alterna cores para melhor visualização
-                static int colorToggle = 0;
-                if (colorToggle % 2 == 0) {
-                    glColor3f(0.8f, 0.6f, 0.2f);  // Laranja
-                } else {
-                    glColor3f(0.2f, 0.6f, 0.8f);  // Azul
-                }
-                colorToggle++;
-                
-                // Desenha o triângulo usando os índices de vértices
-                const Vertex& v1 = modelData.vertices[face.v1];
-                const Vertex& v2 = modelData.vertices[face.v2];
-                const Vertex& v3 = modelData.vertices[face.v3];
-                
-                glVertex3f(v1.x, v1.y, v1.z);
-                glVertex3f(v2.x, v2.y, v2.z);
-                glVertex3f(v3.x, v3.y, v3.z);
-            }
-            glEnd();
-        } else {
-            // Fallback: renderiza vértices diretamente em grupos de 3 (triângulos)
-            glBegin(GL_TRIANGLES);
-            for (size_t i = 0; i < modelData.vertices.size(); i += 3) {
-                if (i + 2 < modelData.vertices.size()) {
-                    // Alterna cores para melhor visualização
-                    static int colorToggle = 0;
-                    if (colorToggle % 2 == 0) {
-                        glColor3f(0.8f, 0.6f, 0.2f);  // Laranja
-                    } else {
-                        glColor3f(0.2f, 0.6f, 0.8f);  // Azul
-                    }
-                    colorToggle++;
-                    
-                    // Desenha o triângulo
-                    const Vertex& v1 = modelData.vertices[i];
-                    const Vertex& v2 = modelData.vertices[i + 1];
-                    const Vertex& v3 = modelData.vertices[i + 2];
-                    
-                    glVertex3f(v1.x, v1.y, v1.z);
-                    glVertex3f(v2.x, v2.y, v2.z);
-                    glVertex3f(v3.x, v3.y, v3.z);
-                }
-            }
-            glEnd();
-        }
-    }
+    // Renderiza toda a árvore de grupos com transformações hierárquicas
+    renderGroup(sceneRootGroup);
     
     // Troca os buffers (double buffering) para exibir a cena renderizada
     glutSwapBuffers();

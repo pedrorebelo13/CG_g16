@@ -25,10 +25,6 @@ struct Model {
     std::string filename; ///< Caminho do arquivo .3d a carregar
 };
 
-struct Model {
-    std::string filename; ///< Caminho do arquivo .3d a carregar
-};
-
 enum TransformType {
     TRANSLATE,
     ROTATE,
@@ -124,6 +120,16 @@ public:
                             Group& rootGroup);
     
 private:
+    /**
+     * @brief Extrai parâmetros da janela do elemento XML <window>.
+     */
+    static void parseWindow(tinyxml2::XMLElement* windowElement, Window& window);
+
+    /**
+     * @brief Extrai parâmetros da câmera do elemento XML <camera>.
+     */
+    static void parseCamera(tinyxml2::XMLElement* cameraElement, Camera& camera);
+
     /**
      * @brief Parse recursivo de um grupo e seus filhos.
      *

@@ -1,5 +1,6 @@
 #include "parser.h"
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 using namespace tinyxml2;
@@ -31,20 +32,77 @@ bool SimpleParser::parseXMLFile(const std::string& filename,
     XMLElement* cameraElement = worldElement->FirstChildElement("camera");
     parseCamera(cameraElement, camera);
 
-    // Parse de grupo e modelos
+    // Parse da hierarquia de grupos
     XMLElement* groupElement = worldElement->FirstChildElement("group");
     if (groupElement) {
-        XMLElement* modelsElement = groupElement->FirstChildElement("models");
-        if (modelsElement) {
-            parseModels(modelsElement, group);
-        } else {
-            cerr << "Aviso: elemento 'models' não encontrado no grupo" << endl;
-        }
+        group = parseGroup(groupElement);
     } else {
         cerr << "Aviso: elemento 'group' não encontrado" << endl;
     }
 
     return true;
+}
+
+
+Group SimpleParser::parseGroup(XMLElement* groupElement) {
+    Group group;
+
+    if (!groupElement) {
+        return group;
+    }
+
+    XMLElement* transformElement = groupElement->FirstChildElement("transform");
+    if (transformElement) {
+        parseTransforms(transformElement, group);
+    }
+
+    XMLElement* modelsElement = groupElement->FirstChildElement("models");
+    if (modelsElement) {
+        parseModels(modelsElement, group);
+    }
+
+    XMLElement* childGroupElement = groupElement->FirstChildElement("group");
+    while (childGroupElement) {
+        group.children.push_back(parseGroup(childGroupElement));
+        childGroupElement = childGroupElement->NextSiblingElement("group");
+    }
+
+    return group;
+}
+
+
+void SimpleParser::parseTransforms(XMLElement* transformElement, Group& group) {
+    if (!transformElement) {
+        return;
+    }
+
+    XMLElement* transformNode = transformElement->FirstChildElement();
+    while (transformNode) {
+        const char* tag = transformNode->Value();
+
+        if (strcmp(tag, "translate") == 0) {
+            float x = 0.0f, y = 0.0f, z = 0.0f;
+            transformNode->QueryFloatAttribute("x", &x);
+            transformNode->QueryFloatAttribute("y", &y);
+            transformNode->QueryFloatAttribute("z", &z);
+            group.transformations.push_back(Transformation(TRANSLATE, x, y, z, 0.0f));
+        } else if (strcmp(tag, "rotate") == 0) {
+            float angle = 0.0f, x = 0.0f, y = 0.0f, z = 0.0f;
+            transformNode->QueryFloatAttribute("angle", &angle);
+            transformNode->QueryFloatAttribute("x", &x);
+            transformNode->QueryFloatAttribute("y", &y);
+            transformNode->QueryFloatAttribute("z", &z);
+            group.transformations.push_back(Transformation(ROTATE, x, y, z, angle));
+        } else if (strcmp(tag, "scale") == 0) {
+            float x = 1.0f, y = 1.0f, z = 1.0f;
+            transformNode->QueryFloatAttribute("x", &x);
+            transformNode->QueryFloatAttribute("y", &y);
+            transformNode->QueryFloatAttribute("z", &z);
+            group.transformations.push_back(Transformation(SCALE, x, y, z, 0.0f));
+        }
+
+        transformNode = transformNode->NextSiblingElement();
+    }
 }
 
 
@@ -136,9 +194,6 @@ void SimpleParser::parseModels(XMLElement* modelsElement, Group& group) {
         cerr << "Erro: elemento 'models' inválido" << endl;
         return;
     }
-    
-    // Limpa lista anterior de modelos
-    group.models.clear();
     
     // Itera sobre todos os elementos <model>
     XMLElement* modelElement = modelsElement->FirstChildElement("model");
