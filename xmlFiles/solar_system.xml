@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<world>
+    <window width="1024" height="768" />
+    <camera>
+        <position x="0" y="30" z="50" />
+        <lookAt x="0" y="0" z="0" />
+        <up x="0" y="1" z="0" />
+        <projection fov="60" near="1" far="1000" />
+    </camera>
+
+    <!-- Sistema Solar: Sol no centro com órbitas de planetas -->
+    <group>
+        <!-- Sol (centro, maior) -->
+        <group>
+            <transform>
+                <scale x="4" y="4" z="4" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+
+        <!-- Mercúrio (pequeno, órbita próxima) -->
+        <group>
+            <transform>
+                <translate x="8" y="0" z="0" />
+                <scale x="0.3" y="0.3" z="0.3" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+
+        <!-- Vénus (médio) -->
+        <group>
+            <transform>
+                <translate x="12" y="0" z="0" />
+                <scale x="0.7" y="0.7" z="0.7" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+
+        <!-- Terra (com Lua) -->
+        <group>
+            <transform>
+                <translate x="16" y="0" z="0" />
+                <scale x="0.75" y="0.75" z="0.75" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+
+            <!-- Lua (satélite da Terra) -->
+            <group>
+                <transform>
+                    <translate x="3" y="0" z="0" />
+                    <scale x="0.25" y="0.25" z="0.25" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+        </group>
+
+        <!-- Marte (avermelhado, com satélites) -->
+        <group>
+            <transform>
+                <translate x="22" y="0" z="0" />
+                <scale x="0.5" y="0.5" z="0.5" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+
+            <!-- Fobos (satélite de Marte) -->
+            <group>
+                <transform>
+                    <translate x="2" y="0" z="0" />
+                    <scale x="0.15" y="0.15" z="0.15" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+
+            <!-- Deimos (satélite de Marte) -->
+            <group>
+                <transform>
+                    <translate x="2.5" y="0" z="1" />
+                    <scale x="0.1" y="0.1" z="0.1" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+        </group>
+
+        <!-- Júpiter (gigante com múltiplas luas) -->
+        <group>
+            <transform>
+                <translate x="32" y="0" z="0" />
+                <scale x="1.5" y="1.5" z="1.5" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+
+            <!-- Io (satélite de Júpiter) -->
+            <group>
+                <transform>
+                    <translate x="3" y="0" z="0" />
+                    <scale x="0.2" y="0.2" z="0.2" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+
+            <!-- Europa (satélite de Júpiter) -->
+            <group>
+                <transform>
+                    <translate x="3.5" y="0" z="0.7" />
+                    <scale x="0.18" y="0.18" z="0.18" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+
+            <!-- Ganimedes (satélite de Júpiter) -->
+            <group>
+                <transform>
+                    <translate x="4" y="0.5" z="1" />
+                    <scale x="0.25" y="0.25" z="0.25" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+        </group>
+
+        <!-- Saturno (com anel) -->
+        <group>
+            <transform>
+                <translate x="45" y="0" z="0" />
+            </transform>
+
+            <!-- Planeta Saturno -->
+            <group>
+                <transform>
+                    <scale x="1.2" y="1.2" z="1.2" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+
+            <!-- Anel de Saturno (plano achatado) -->
+            <group>
+                <transform>
+                    <scale x="3" y="0.05" z="3" />
+                </transform>
+                <models>
+                    <model file="plane.3d" />
+                </models>
+            </group>
+
+            <!-- Titã (maior satélite de Saturno) -->
+            <group>
+                <transform>
+                    <translate x="3.5" y="0" z="0" />
+                    <scale x="0.3" y="0.3" z="0.3" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+
+            <!-- Enceladus (satélite de Saturno) -->
+            <group>
+                <transform>
+                    <translate x="2.5" y="0.5" z="1" />
+                    <scale x="0.12" y="0.12" z="0.12" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+        </group>
+
+        <!-- Urano (órbita distante) -->
+        <group>
+            <transform>
+                <translate x="58" y="0" z="0" />
+                <scale x="0.8" y="0.8" z="0.8" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+
+        <!-- Netuno (órbita muito distante) -->
+        <group>
+            <transform>
+                <translate x="68" y="0" z="0" />
+                <scale x="0.75" y="0.75" z="0.75" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+    </group>
+
+</world>
