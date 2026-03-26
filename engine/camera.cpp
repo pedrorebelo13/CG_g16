@@ -1,4 +1,4 @@
-#define _USE_MATH_DEFINES
+ #define _USE_MATH_DEFINES
 #include "camera.h"
 #include <math.h>
 #include <GL/glut.h>
