@@ -14,64 +14,50 @@ using namespace std;
 using namespace tinyxml2;
 
 
-/**
- * @struct Vertex
- * @brief Representa um vértice 3D no espaço.
- */
+// Representa um vértice 3D no espaço.
 struct Vertex {
-    float x, y, z; ///< Coordenadas cartesianas do vértice
+    float x, y, z; // Coordenadas cartesianas do vértice
     
     Vertex() : x(0), y(0), z(0) {}
     Vertex(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
 };
 
-/**
- * @struct Face
- * @brief Representa uma face triangular do modelo (composta por 3 vértices).
- */
+// Representa uma face triangular do modelo (composta por 3 vértices).
 struct Face {
-    int v1, v2, v3;  ///< Índices dos 3 vértices que formam o triângulo
+    int v1, v2, v3;  // Índices dos 3 vértices que formam o triângulo
     
     Face() : v1(0), v2(0), v3(0) {}
     Face(int _v1, int _v2, int _v3) : v1(_v1), v2(_v2), v3(_v3) {}
 };
 
-/**
- * @struct ModelData
- * @brief Armazena dados de um modelo 3D carregado de um arquivo.
- *
- * Cada modelo carregado mantém:
- * - Lista de vértices (coordenadas 3D)
- * - Lista de faces (triângulos definidos por índices de vértices)
- * - Informação se o modelo foi carregado com sucesso
- */
+// Armazena dados de um modelo 3D carregado de um arquivo.
+// Cada modelo carregado mantém:
+// - Lista de vértices (coordenadas 3D)
+// - Lista de faces (triângulos definidos por índices de vértices)
+// - Informação se o modelo foi carregado com sucesso
 struct ModelData {
-    string filename;              ///< Caminho do arquivo de origem
-    vector<Vertex> vertices;      ///< Lista de vértices do modelo
-    vector<Face> faces;           ///< Lista de faces (triângulos)
-    bool loaded;                  ///< Flag indicando se foi carregado com sucesso
+    string filename;              // Caminho do arquivo de origem
+    vector<Vertex> vertices;      // Lista de vértices do modelo
+    vector<Face> faces;           // Lista de faces (triângulos)
+    bool loaded;                  // Flag indicando se foi carregado com sucesso
     
     ModelData() : loaded(false) {}
 };
 
 
-Window window;                              ///< Dimensões da janela de visualização
-Camera* camera;                             ///< Ponteiro para a câmera da cena
-Group sceneRootGroup;                       ///< Grupo raiz da cena com hierarquia completa
-map<string, ModelData> modelDataMap;        ///< Cache de modelos carregados por referência
+Window window;                              // Dimensões da janela de visualização
+Camera* camera;                             // Ponteiro para a câmera da cena
+Group sceneRootGroup;                       // Grupo raiz da cena com hierarquia completa
+map<string, ModelData> modelDataMap;        // Cache de modelos carregados por referência
 
-bool showAxes = false;                      ///< Flag para mostrar/esconder eixos coordenados
-bool wireframeMode = false;                 ///< Flag para ativar/desativar modo wireframe
+bool showAxes = false;                      // Flag para mostrar/esconder eixos coordenados
+bool wireframeMode = false;                 // Flag para ativar/desativar modo wireframe
 
 
-/**
- * @brief Carrega um modelo 3D de um arquivo .3d em formato XML.
- *
- * @param modelData Referência para struct que será preenchida com os dados
- * @param filename Caminho do arquivo .3d
- *
- * @return true se carregado com sucesso, false caso contrário
- */
+// Carrega um modelo 3D de um arquivo .3d em formato XML.
+// - modelData: Referência para struct que será preenchida com os dados
+// - filename: Caminho do arquivo .3d
+// - Return: true se carregado com sucesso, false caso contrário
 bool loadModel(ModelData& modelData, const string& filename);
 bool fileExists(const string& path);
 string resolveModelPath(const string& modelFile, const string& configFilePath);
@@ -80,51 +66,36 @@ void applyTransformation(const Transformation& transformation);
 void drawModel(const ModelData& modelData);
 void renderGroup(const Group& group);
 
-/**
- * @brief Callback GLUT para redimensionamento da janela.
- *
- * @param w Nova largura da janela em pixels
- * @param h Nova altura da janela em pixels
- */
+// Callback GLUT para redimensionamento da janela.
+// - w: Nova largura da janela em pixels
+// - h: Nova altura da janela em pixels
 void changeSize(int w, int h);
 
-/**
- * @brief Callback GLUT para renderização da cena.
- *
- * Chamada repetidamente em cada frame. Responsável por:
- * - Limpar buffers
- * - Posicionar câmera
- * - Desenhar modelos
- * - Trocar buffers (double buffering)
- */
+// Callback GLUT para renderização da cena.
+// Chamada repetidamente em cada frame. Responsável por:
+// - Limpar buffers
+// - Posicionar câmera
+// - Desenhar modelos
+// - Trocar buffers (double buffering)
 void renderScene();
 
-/**
- * @brief Desenha os eixos coordenados (X, Y, Z) na origem.
- *
- * Usa cores padrão:
- * - X: Vermelho
- * - Y: Verde
- * - Z: Azul
- */
+// Desenha os eixos coordenados (X, Y, Z) na origem.
+// Usa cores padrão:
+// - X: Vermelho
+// - Y: Verde
+// - Z: Azul
 void drawAxes();
 
-/**
- * @brief Callback GLUT para entrada de teclado normal (caracteres ASCII).
- *
- * @param key Código ASCII da tecla pressionada
- * @param xx Posição X do mouse (não utilizada)
- * @param yy Posição Y do mouse (não utilizada)
- */
+// Callback GLUT para entrada de teclado normal (caracteres ASCII).
+// - key: Código ASCII da tecla pressionada
+// - xx: Posição X do mouse (não utilizada)
+// - yy: Posição Y do mouse (não utilizada)
 void processKeys(unsigned char key, int xx, int yy);
 
-/**
- * @brief Callback GLUT para entrada de teclas especiais (setas, F1, etc).
- *
- * @param key Código da tecla especial
- * @param xx Posição X do mouse (não utilizada)
- * @param yy Posição Y do mouse (não utilizada)
- */
+// Callback GLUT para entrada de teclas especiais (setas, F1, etc).
+// - key: Código da tecla especial
+// - xx: Posição X do mouse (não utilizada)
+// - yy: Posição Y do mouse (não utilizada)
 void processSpecialKeys(int key, int xx, int yy);
 
 
@@ -240,27 +211,21 @@ int main(int argc, char** argv) {
 }
 
 
-/**
- * @brief Carrega um modelo 3D em formato XML do arquivo especificado.
- *
- * O arquivo deve estar em formato XML com estrutura:
- * @code
- * <plane|box|sphere|cone>
- *   <triangle>
- *     <vertex x="x1" y="y1" z="z1" />
- *     <vertex x="x2" y="y2" z="z2" />
- *     <vertex x="x3" y="y3" z="z3" />
- *   </triangle>
- *   ...
- * </plane|box|sphere|cone>
- * @endcode
- *
- * A função realiza:
- * 1. Abertura e leitura do arquivo
- * 2. Parse XML dos vértices e faces
- * 3. Deduplicação de vértices para otimizar uso de memória
- * 4. Armazenamento em estrutura ModelData
- */
+// Carrega um modelo 3D em formato XML do arquivo especificado.
+// O arquivo deve estar em formato XML com estrutura:
+// <plane|box|sphere|cone>
+//   <triangle>
+//     <vertex x="x1" y="y1" z="z1" />
+//     <vertex x="x2" y="y2" z="z2" />
+//     <vertex x="x3" y="y3" z="z3" />
+//   </triangle>
+//   ...
+// </plane|box|sphere|cone>
+// // A função realiza:
+// 1. Abertura e leitura do arquivo
+// 2. Parse XML dos vértices e faces
+// 3. Deduplicação de vértices para otimizar uso de memória
+// 4. Armazenamento em estrutura ModelData
 bool loadModel(ModelData& modelData, const string& filename) {
     // Tenta abrir o arquivo do modelo
     ifstream file(filename);
@@ -499,14 +464,11 @@ void renderGroup(const Group& group) {
     glPopMatrix();
 }
 
-/**
- * @brief Desenha os eixos coordenados X, Y, Z na origem em cores padrão.
- *
- * Cada eixo é representado como uma linha:
- * - X (vermelho): -100 a +100
- * - Y (verde): -100 a +100
- * - Z (azul): -100 a +100
- */
+// Desenha os eixos coordenados X, Y, Z na origem em cores padrão.
+// Cada eixo é representado como uma linha:
+// - X (vermelho): -100 a +100
+// - Y (verde): -100 a +100
+// - Z (azul): -100 a +100
 void drawAxes() {
     glBegin(GL_LINES);
     
@@ -530,11 +492,8 @@ void drawAxes() {
 
 
 
-/**
- * @brief Callback de redimensionamento de janela.
- *
- * Ajusta o viewport e a matriz de projeção quando a janela é redimensionada.
- */
+// Callback de redimensionamento de janela.
+// Ajusta o viewport e a matriz de projeção quando a janela é redimensionada.
 void changeSize(int w, int h) {
     // Previne divisão por zero
     if (h == 0) h = 1;
@@ -558,15 +517,12 @@ void changeSize(int w, int h) {
 
 
 
-/**
- * @brief Callback de renderização GLUT.
- *
- * Chamada a cada frame para:
- * 1. Limpar buffers
- * 2. Posicionar câmera
- * 3. Desenhar modelos
- * 4. Trocar buffers (double buffering)
- */
+// Callback de renderização GLUT.
+// Chamada a cada frame para:
+// 1. Limpar buffers
+// 2. Posicionar câmera
+// 3. Desenhar modelos
+// 4. Trocar buffers (double buffering)
 void renderScene() {
     // Limpa todos os buffers de desenho
     glDisable(GL_CULL_FACE);
@@ -598,16 +554,13 @@ void renderScene() {
 }
 
 
-/**
- * @brief Processa entrada de teclado (caracteres ASCII).
- *
- * Controles:
- * - 'A': Mostrar/ocultar eixos
- * - 'L': Ativar/desativar wireframe
- * - 'W': Aproximar câmera (zoom in)
- * - 'S': Afastar câmera (zoom out)
- * - ESC: Sair da aplicação
- */
+// Processa entrada de teclado (caracteres ASCII).
+// Controles:
+// - 'A': Mostrar/ocultar eixos
+// - 'L': Ativar/desativar wireframe
+// - 'W': Aproximar câmera (zoom in)
+// - 'S': Afastar câmera (zoom out)
+// - ESC: Sair da aplicação
 void processKeys(unsigned char key, int xx, int yy) {
     switch (key) {
         case 'a':
@@ -647,15 +600,12 @@ void processKeys(unsigned char key, int xx, int yy) {
     glutPostRedisplay();
 }
 
-/**
- * @brief Processa entrada de teclas especiais (setas, F1-F12, etc).
- *
- * Controles:
- * - Seta para cima: Rotacionar câmera para cima
- * - Seta para baixo: Rotacionar câmera para baixo
- * - Seta para esquerda: Rotacionar câmera para esquerda
- * - Seta para direita: Rotacionar câmera para direita
- */
+// Processa entrada de teclas especiais (setas, F1-F12, etc).
+// Controles:
+// - Seta para cima: Rotacionar câmera para cima
+// - Seta para baixo: Rotacionar câmera para baixo
+// - Seta para esquerda: Rotacionar câmera para esquerda
+// - Seta para direita: Rotacionar câmera para direita
 void processSpecialKeys(int key, int xx, int yy) {
     switch (key) {
         case GLUT_KEY_UP:

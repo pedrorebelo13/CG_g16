@@ -4,13 +4,13 @@
 #include <GL/glut.h>
 #include <iostream>
 
-/// Incremento de rotação em radianos por chamada
+// Incremento de rotação em radianos por chamada
 const float ROTATION_INCREMENT = 0.1f;
-/// Incremento de zoom em unidades por chamada
+// Incremento de zoom em unidades por chamada
 const float ZOOM_INCREMENT = 0.1f;
-/// Raio mínimo permitido para evitar câmera muito próxima
+// Raio mínimo permitido para evitar câmera muito próxima
 const float MIN_RADIUS = 0.1f;
-/// Margem de segurança para limites de beta (elevação)
+// Margem de segurança para limites de beta (elevação)
 const float BETA_MARGIN = 0.01f;
 
 
