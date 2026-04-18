@@ -1,0 +1,12 @@
+<plane>
+  <triangle>
+    <vertex x='-0.5' y='0' z='-0.5'/>
+    <vertex x='-0.5' y='0' z='0.5'/>
+    <vertex x='0.5' y='0' z='-0.5'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.5' y='0' z='-0.5'/>
+    <vertex x='-0.5' y='0' z='0.5'/>
+    <vertex x='0.5' y='0' z='0.5'/>
+  </triangle>
+</plane>
