@@ -106,14 +106,21 @@ void getCatmullRomPosition(float globalT, const vector<Point3D>& pts,
 
 void buildAlignMatrix(float* deriv, float* matrix) {
     float len=sqrt(deriv[0]*deriv[0]+deriv[1]*deriv[1]+deriv[2]*deriv[2]);
+    
     if(len<1e-6f) len=1.0f;
+    
     float X[3]={deriv[0]/len,deriv[1]/len,deriv[2]/len};
     float Ztmp[3]={0,1,0};
     float dot=X[0]*Ztmp[0]+X[1]*Ztmp[1]+X[2]*Ztmp[2];
+    
     if(fabs(dot)>0.99f){Ztmp[0]=0;Ztmp[1]=0;Ztmp[2]=1;}
+    
     float Y[3]={Ztmp[1]*X[2]-Ztmp[2]*X[1],Ztmp[2]*X[0]-Ztmp[0]*X[2],Ztmp[0]*X[1]-Ztmp[1]*X[0]};
+    
     len=sqrt(Y[0]*Y[0]+Y[1]*Y[1]+Y[2]*Y[2]); if(len<1e-6f)len=1.0f;
+    
     Y[0]/=len;Y[1]/=len;Y[2]/=len;
+    
     float Z[3]={X[1]*Y[2]-X[2]*Y[1],X[2]*Y[0]-X[0]*Y[2],X[0]*Y[1]-X[1]*Y[0]};
     matrix[ 0]=X[0];matrix[ 1]=X[1];matrix[ 2]=X[2];matrix[ 3]=0;
     matrix[ 4]=Y[0];matrix[ 5]=Y[1];matrix[ 6]=Y[2];matrix[ 7]=0;
