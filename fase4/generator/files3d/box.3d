@@ -1,0 +1,542 @@
+<box>
+  <triangle>
+    <vertex x='-1' y='-1' z='1'/>
+    <vertex x='-1' y='-0.333333' z='1'/>
+    <vertex x='-0.333333' y='-1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-1' z='1'/>
+    <vertex x='-1' y='-0.333333' z='1'/>
+    <vertex x='-0.333333' y='-0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-1' z='1'/>
+    <vertex x='-0.333333' y='-0.333333' z='1'/>
+    <vertex x='0.333333' y='-1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-1' z='1'/>
+    <vertex x='-0.333333' y='-0.333333' z='1'/>
+    <vertex x='0.333333' y='-0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-1' z='1'/>
+    <vertex x='0.333333' y='-0.333333' z='1'/>
+    <vertex x='1' y='-1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-1' z='1'/>
+    <vertex x='0.333333' y='-0.333333' z='1'/>
+    <vertex x='1' y='-0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-0.333333' z='1'/>
+    <vertex x='-1' y='0.333333' z='1'/>
+    <vertex x='-0.333333' y='-0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-0.333333' z='1'/>
+    <vertex x='-1' y='0.333333' z='1'/>
+    <vertex x='-0.333333' y='0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-0.333333' z='1'/>
+    <vertex x='-0.333333' y='0.333333' z='1'/>
+    <vertex x='0.333333' y='-0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-0.333333' z='1'/>
+    <vertex x='-0.333333' y='0.333333' z='1'/>
+    <vertex x='0.333333' y='0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-0.333333' z='1'/>
+    <vertex x='0.333333' y='0.333333' z='1'/>
+    <vertex x='1' y='-0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-0.333333' z='1'/>
+    <vertex x='0.333333' y='0.333333' z='1'/>
+    <vertex x='1' y='0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='0.333333' z='1'/>
+    <vertex x='-1' y='1' z='1'/>
+    <vertex x='-0.333333' y='0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='0.333333' z='1'/>
+    <vertex x='-1' y='1' z='1'/>
+    <vertex x='-0.333333' y='1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='0.333333' z='1'/>
+    <vertex x='-0.333333' y='1' z='1'/>
+    <vertex x='0.333333' y='0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='0.333333' z='1'/>
+    <vertex x='-0.333333' y='1' z='1'/>
+    <vertex x='0.333333' y='1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='0.333333' z='1'/>
+    <vertex x='0.333333' y='1' z='1'/>
+    <vertex x='1' y='0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='0.333333' z='1'/>
+    <vertex x='0.333333' y='1' z='1'/>
+    <vertex x='1' y='1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-1' z='-1'/>
+    <vertex x='-0.333333' y='-0.333333' z='-1'/>
+    <vertex x='-1' y='-1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-1' z='-1'/>
+    <vertex x='-0.333333' y='-0.333333' z='-1'/>
+    <vertex x='-1' y='-0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-1' z='-1'/>
+    <vertex x='0.333333' y='-0.333333' z='-1'/>
+    <vertex x='-0.333333' y='-1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-1' z='-1'/>
+    <vertex x='0.333333' y='-0.333333' z='-1'/>
+    <vertex x='-0.333333' y='-0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-1' z='-1'/>
+    <vertex x='1' y='-0.333333' z='-1'/>
+    <vertex x='0.333333' y='-1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-1' z='-1'/>
+    <vertex x='1' y='-0.333333' z='-1'/>
+    <vertex x='0.333333' y='-0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-0.333333' z='-1'/>
+    <vertex x='-0.333333' y='0.333333' z='-1'/>
+    <vertex x='-1' y='-0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-0.333333' z='-1'/>
+    <vertex x='-0.333333' y='0.333333' z='-1'/>
+    <vertex x='-1' y='0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-0.333333' z='-1'/>
+    <vertex x='0.333333' y='0.333333' z='-1'/>
+    <vertex x='-0.333333' y='-0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-0.333333' z='-1'/>
+    <vertex x='0.333333' y='0.333333' z='-1'/>
+    <vertex x='-0.333333' y='0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-0.333333' z='-1'/>
+    <vertex x='1' y='0.333333' z='-1'/>
+    <vertex x='0.333333' y='-0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-0.333333' z='-1'/>
+    <vertex x='1' y='0.333333' z='-1'/>
+    <vertex x='0.333333' y='0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='0.333333' z='-1'/>
+    <vertex x='-0.333333' y='1' z='-1'/>
+    <vertex x='-1' y='0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='0.333333' z='-1'/>
+    <vertex x='-0.333333' y='1' z='-1'/>
+    <vertex x='-1' y='1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='0.333333' z='-1'/>
+    <vertex x='0.333333' y='1' z='-1'/>
+    <vertex x='-0.333333' y='0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='0.333333' z='-1'/>
+    <vertex x='0.333333' y='1' z='-1'/>
+    <vertex x='-0.333333' y='1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='0.333333' z='-1'/>
+    <vertex x='1' y='1' z='-1'/>
+    <vertex x='0.333333' y='0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='0.333333' z='-1'/>
+    <vertex x='1' y='1' z='-1'/>
+    <vertex x='0.333333' y='1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='1' z='-0.333333'/>
+    <vertex x='-1' y='1' z='-1'/>
+    <vertex x='-0.333333' y='1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='1' z='-0.333333'/>
+    <vertex x='-1' y='1' z='-1'/>
+    <vertex x='-0.333333' y='1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='1' z='-0.333333'/>
+    <vertex x='-0.333333' y='1' z='-1'/>
+    <vertex x='0.333333' y='1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='1' z='-0.333333'/>
+    <vertex x='-0.333333' y='1' z='-1'/>
+    <vertex x='0.333333' y='1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='1' z='-0.333333'/>
+    <vertex x='0.333333' y='1' z='-1'/>
+    <vertex x='1' y='1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='1' z='-0.333333'/>
+    <vertex x='0.333333' y='1' z='-1'/>
+    <vertex x='1' y='1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='1' z='0.333333'/>
+    <vertex x='-1' y='1' z='-0.333333'/>
+    <vertex x='-0.333333' y='1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='1' z='0.333333'/>
+    <vertex x='-1' y='1' z='-0.333333'/>
+    <vertex x='-0.333333' y='1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='1' z='0.333333'/>
+    <vertex x='-0.333333' y='1' z='-0.333333'/>
+    <vertex x='0.333333' y='1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='1' z='0.333333'/>
+    <vertex x='-0.333333' y='1' z='-0.333333'/>
+    <vertex x='0.333333' y='1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='1' z='0.333333'/>
+    <vertex x='0.333333' y='1' z='-0.333333'/>
+    <vertex x='1' y='1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='1' z='0.333333'/>
+    <vertex x='0.333333' y='1' z='-0.333333'/>
+    <vertex x='1' y='1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='1' z='1'/>
+    <vertex x='-1' y='1' z='0.333333'/>
+    <vertex x='-0.333333' y='1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='1' z='1'/>
+    <vertex x='-1' y='1' z='0.333333'/>
+    <vertex x='-0.333333' y='1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='1' z='1'/>
+    <vertex x='-0.333333' y='1' z='0.333333'/>
+    <vertex x='0.333333' y='1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='1' z='1'/>
+    <vertex x='-0.333333' y='1' z='0.333333'/>
+    <vertex x='0.333333' y='1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='1' z='1'/>
+    <vertex x='0.333333' y='1' z='0.333333'/>
+    <vertex x='1' y='1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='1' z='1'/>
+    <vertex x='0.333333' y='1' z='0.333333'/>
+    <vertex x='1' y='1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-1' z='-1'/>
+    <vertex x='-1' y='-1' z='-0.333333'/>
+    <vertex x='-0.333333' y='-1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-1' z='-1'/>
+    <vertex x='-1' y='-1' z='-0.333333'/>
+    <vertex x='-0.333333' y='-1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-1' z='-1'/>
+    <vertex x='-0.333333' y='-1' z='-0.333333'/>
+    <vertex x='0.333333' y='-1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-1' z='-1'/>
+    <vertex x='-0.333333' y='-1' z='-0.333333'/>
+    <vertex x='0.333333' y='-1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-1' z='-1'/>
+    <vertex x='0.333333' y='-1' z='-0.333333'/>
+    <vertex x='1' y='-1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-1' z='-1'/>
+    <vertex x='0.333333' y='-1' z='-0.333333'/>
+    <vertex x='1' y='-1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-1' z='-0.333333'/>
+    <vertex x='-1' y='-1' z='0.333333'/>
+    <vertex x='-0.333333' y='-1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-1' z='-0.333333'/>
+    <vertex x='-1' y='-1' z='0.333333'/>
+    <vertex x='-0.333333' y='-1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-1' z='-0.333333'/>
+    <vertex x='-0.333333' y='-1' z='0.333333'/>
+    <vertex x='0.333333' y='-1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-1' z='-0.333333'/>
+    <vertex x='-0.333333' y='-1' z='0.333333'/>
+    <vertex x='0.333333' y='-1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-1' z='-0.333333'/>
+    <vertex x='0.333333' y='-1' z='0.333333'/>
+    <vertex x='1' y='-1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-1' z='-0.333333'/>
+    <vertex x='0.333333' y='-1' z='0.333333'/>
+    <vertex x='1' y='-1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-1' z='0.333333'/>
+    <vertex x='-1' y='-1' z='1'/>
+    <vertex x='-0.333333' y='-1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-1' z='0.333333'/>
+    <vertex x='-1' y='-1' z='1'/>
+    <vertex x='-0.333333' y='-1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-0.333333' y='-1' z='0.333333'/>
+    <vertex x='-0.333333' y='-1' z='1'/>
+    <vertex x='0.333333' y='-1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-1' z='0.333333'/>
+    <vertex x='-0.333333' y='-1' z='1'/>
+    <vertex x='0.333333' y='-1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='0.333333' y='-1' z='0.333333'/>
+    <vertex x='0.333333' y='-1' z='1'/>
+    <vertex x='1' y='-1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-1' z='0.333333'/>
+    <vertex x='0.333333' y='-1' z='1'/>
+    <vertex x='1' y='-1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-1' z='-0.333333'/>
+    <vertex x='-1' y='-0.333333' z='-0.333333'/>
+    <vertex x='-1' y='-1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-1' z='-1'/>
+    <vertex x='-1' y='-0.333333' z='-0.333333'/>
+    <vertex x='-1' y='-0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-1' z='0.333333'/>
+    <vertex x='-1' y='-0.333333' z='0.333333'/>
+    <vertex x='-1' y='-1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-1' z='-0.333333'/>
+    <vertex x='-1' y='-0.333333' z='0.333333'/>
+    <vertex x='-1' y='-0.333333' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-1' z='1'/>
+    <vertex x='-1' y='-0.333333' z='1'/>
+    <vertex x='-1' y='-1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-1' z='0.333333'/>
+    <vertex x='-1' y='-0.333333' z='1'/>
+    <vertex x='-1' y='-0.333333' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-0.333333' z='-0.333333'/>
+    <vertex x='-1' y='0.333333' z='-0.333333'/>
+    <vertex x='-1' y='-0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-0.333333' z='-1'/>
+    <vertex x='-1' y='0.333333' z='-0.333333'/>
+    <vertex x='-1' y='0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-0.333333' z='0.333333'/>
+    <vertex x='-1' y='0.333333' z='0.333333'/>
+    <vertex x='-1' y='-0.333333' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-0.333333' z='-0.333333'/>
+    <vertex x='-1' y='0.333333' z='0.333333'/>
+    <vertex x='-1' y='0.333333' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-0.333333' z='1'/>
+    <vertex x='-1' y='0.333333' z='1'/>
+    <vertex x='-1' y='-0.333333' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='-0.333333' z='0.333333'/>
+    <vertex x='-1' y='0.333333' z='1'/>
+    <vertex x='-1' y='0.333333' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='0.333333' z='-0.333333'/>
+    <vertex x='-1' y='1' z='-0.333333'/>
+    <vertex x='-1' y='0.333333' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='0.333333' z='-1'/>
+    <vertex x='-1' y='1' z='-0.333333'/>
+    <vertex x='-1' y='1' z='-1'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='0.333333' z='0.333333'/>
+    <vertex x='-1' y='1' z='0.333333'/>
+    <vertex x='-1' y='0.333333' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='0.333333' z='-0.333333'/>
+    <vertex x='-1' y='1' z='0.333333'/>
+    <vertex x='-1' y='1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='0.333333' z='1'/>
+    <vertex x='-1' y='1' z='1'/>
+    <vertex x='-1' y='0.333333' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='-1' y='0.333333' z='0.333333'/>
+    <vertex x='-1' y='1' z='1'/>
+    <vertex x='-1' y='1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-1' z='-1'/>
+    <vertex x='1' y='-0.333333' z='-1'/>
+    <vertex x='1' y='-1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-1' z='-0.333333'/>
+    <vertex x='1' y='-0.333333' z='-1'/>
+    <vertex x='1' y='-0.333333' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-1' z='-0.333333'/>
+    <vertex x='1' y='-0.333333' z='-0.333333'/>
+    <vertex x='1' y='-1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-1' z='0.333333'/>
+    <vertex x='1' y='-0.333333' z='-0.333333'/>
+    <vertex x='1' y='-0.333333' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-1' z='0.333333'/>
+    <vertex x='1' y='-0.333333' z='0.333333'/>
+    <vertex x='1' y='-1' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-1' z='1'/>
+    <vertex x='1' y='-0.333333' z='0.333333'/>
+    <vertex x='1' y='-0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-0.333333' z='-1'/>
+    <vertex x='1' y='0.333333' z='-1'/>
+    <vertex x='1' y='-0.333333' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-0.333333' z='-0.333333'/>
+    <vertex x='1' y='0.333333' z='-1'/>
+    <vertex x='1' y='0.333333' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-0.333333' z='-0.333333'/>
+    <vertex x='1' y='0.333333' z='-0.333333'/>
+    <vertex x='1' y='-0.333333' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-0.333333' z='0.333333'/>
+    <vertex x='1' y='0.333333' z='-0.333333'/>
+    <vertex x='1' y='0.333333' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-0.333333' z='0.333333'/>
+    <vertex x='1' y='0.333333' z='0.333333'/>
+    <vertex x='1' y='-0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='-0.333333' z='1'/>
+    <vertex x='1' y='0.333333' z='0.333333'/>
+    <vertex x='1' y='0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='0.333333' z='-1'/>
+    <vertex x='1' y='1' z='-1'/>
+    <vertex x='1' y='0.333333' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='0.333333' z='-0.333333'/>
+    <vertex x='1' y='1' z='-1'/>
+    <vertex x='1' y='1' z='-0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='0.333333' z='-0.333333'/>
+    <vertex x='1' y='1' z='-0.333333'/>
+    <vertex x='1' y='0.333333' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='0.333333' z='0.333333'/>
+    <vertex x='1' y='1' z='-0.333333'/>
+    <vertex x='1' y='1' z='0.333333'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='0.333333' z='0.333333'/>
+    <vertex x='1' y='1' z='0.333333'/>
+    <vertex x='1' y='0.333333' z='1'/>
+  </triangle>
+  <triangle>
+    <vertex x='1' y='0.333333' z='1'/>
+    <vertex x='1' y='1' z='0.333333'/>
+    <vertex x='1' y='1' z='1'/>
+  </triangle>
+</box>

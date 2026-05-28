@@ -1,0 +1,221 @@
+<world>
+    <window width="800" height="600" />
+    <camera>
+        <position x="0" y="30" z="60" />
+        <lookAt x="0" y="0" z="0" />
+        <up x="0" y="1" z="0" />
+        <projection fov="60" near="1" far="1000" />
+    </camera>
+
+        <!--
+            Nó raiz do sistema solar.
+            Tudo o que está dentro deste group herda este referencial global.
+            O Sol fica estático no centro para servir de pivô visual das órbitas.
+        -->
+    <group>
+        <transform>
+            <scale x="4" y="4" z="4" />
+        </transform>
+        <models>
+            <model file="sphere.3d" />
+        </models>
+
+        <!-- Mercúrio: rotação temporal no Y + translação radial => órbita circular simples -->
+        <group>
+            <transform>
+                <rotate time="10" x="0" y="1" z="0" />
+                <translate x="8" y="0" z="0" />
+                <scale x="0.3" y="0.3" z="0.3" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+
+        <!-- Vénus: orbita em 25s -->
+        <group>
+            <transform>
+                <rotate time="25" x="0" y="1" z="0" />
+                <translate x="12" y="0" z="0" />
+                <scale x="0.6" y="0.6" z="0.6" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+
+        <!-- Terra: mesmo padrão orbital; a Lua é modelada como subgrupo (referencial local da Terra) -->
+        <group>
+            <transform>
+                <rotate time="40" x="0" y="1" z="0" />
+                <translate x="16" y="0" z="0" />
+                <scale x="0.7" y="0.7" z="0.7" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+
+            <!-- Lua: orbita a Terra em 5s -->
+            <group>
+                <transform>
+                    <rotate time="5" x="0" y="1" z="0" />
+                    <translate x="2.5" y="0" z="0" />
+                    <scale x="0.25" y="0.25" z="0.25" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+        </group>
+
+        <!-- Marte: orbita em 80s -->
+        <group>
+            <transform>
+                <rotate time="80" x="0" y="1" z="0" />
+                <translate x="22" y="0" z="0" />
+                <scale x="0.5" y="0.5" z="0.5" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+
+            <!-- Fobos: orbita Marte em 3s -->
+            <group>
+                <transform>
+                    <rotate time="3" x="0" y="1" z="0" />
+                    <translate x="1.5" y="0" z="0" />
+                    <scale x="0.15" y="0.15" z="0.15" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+        </group>
+
+        <!-- Júpiter: orbita em 200s -->
+        <group>
+            <transform>
+                <rotate time="200" x="0" y="1" z="0" />
+                <translate x="32" y="0" z="0" />
+                <scale x="1.5" y="1.5" z="1.5" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+
+            <!-- Io: orbita Júpiter em 4s -->
+            <group>
+                <transform>
+                    <rotate time="4" x="0" y="1" z="0" />
+                    <translate x="3" y="0" z="0" />
+                    <scale x="0.2" y="0.2" z="0.2" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+
+            <!-- Europa: orbita Júpiter em 7s -->
+            <group>
+                <transform>
+                    <rotate time="7" x="0" y="1" z="0" />
+                    <translate x="4" y="0" z="0" />
+                    <scale x="0.18" y="0.18" z="0.18" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+        </group>
+
+        <!-- Saturno: o planeta e o anel são separados para permitir animações distintas -->
+        <group>
+            <transform>
+                <rotate time="500" x="0" y="1" z="0" />
+                <translate x="45" y="0" z="0" />
+            </transform>
+
+            <!-- Planeta Saturno -->
+            <group>
+                <transform>
+                    <scale x="1.2" y="1.2" z="1.2" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+
+            <!-- Anel de Saturno (plano achatado, rotação própria) -->
+            <group>
+                <transform>
+                    <rotate time="300" x="0" y="1" z="0" />
+                    <scale x="3.5" y="0.05" z="3.5" />
+                </transform>
+                <models>
+                    <model file="plane.3d" />
+                </models>
+            </group>
+        </group>
+
+        <!-- Urano: orbita em 900s -->
+        <group>
+            <transform>
+                <rotate time="900" x="0" y="1" z="0" />
+                <translate x="58" y="0" z="0" />
+                <scale x="0.9" y="0.9" z="0.9" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+
+        <!-- Netuno: orbita em 1400s -->
+        <group>
+            <transform>
+                <rotate time="1400" x="0" y="1" z="0" />
+                <translate x="68" y="0" z="0" />
+                <scale x="0.85" y="0.85" z="0.85" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+
+    </group>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+         COMETA — segue uma curva Catmull-Rom elíptica inclinada.
+         O modelo é gerado com: ./generator bezier teapot.patch 10 comet.3d
+         O cometa alinha-se automaticamente à tangente da curva (align="True").
+            Nota: os primeiros/últimos pontos repetidos ajudam a fechar o percurso
+            e a suavizar a transição entre o fim e o início do ciclo.
+         ══════════════════════════════════════════════════════════════════════ -->
+    <group>
+        <transform>
+            <translate time="30" align="True">
+                <point x="0"    y="5"   z="50"  />
+                <point x="35"   y="8"   z="35"  />
+                <point x="50"   y="5"   z="0"   />
+                <point x="35"   y="2"   z="-35" />
+                <point x="0"    y="5"   z="-50" />
+                <point x="-35"  y="8"   z="-35" />
+                <point x="-50"  y="5"   z="0"   />
+                <point x="-35"  y="2"   z="35"  />
+                <point x="0"    y="5"   z="50"  />
+                <point x="35"   y="8"   z="35"  />
+                <point x="50"   y="5"   z="0"   />
+                <point x="35"   y="2"   z="-35" />
+            </translate>
+            <scale x="0.5" y="0.5" z="0.5" />
+        </transform>
+        <models>
+            <model file="comet.3d" />
+        </models>
+    </group>
+
+</world>
+
+<!--os planetas interiores seguem a escala 
+proporcional real com a Terra a 40s de referência, 
+e os exteriores foram comprimidos para que a animação 
+seja observável em tempo de demonstração-->
