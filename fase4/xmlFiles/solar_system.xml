@@ -7,20 +7,41 @@
         <projection fov="60" near="1" far="1000" />
     </camera>
 
-        <!--
-            Nó raiz do sistema solar.
-            Tudo o que está dentro deste group herda este referencial global.
-            O Sol fica estático no centro para servir de pivô visual das órbitas.
-        -->
+    <!--
+        Luz pontual no centro do Sol.
+        W=1 (point light) → irradia em todas as direções a partir do centro.
+        É a única fonte de luz da cena, simulando o Sol real.
+    -->
+    <lights>
+        <light type="point" posX="0" posY="0" posZ="0" />
+    </lights>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SOL — centro estático da hierarquia.
+         emissive alto: o Sol emite luz própria, não depende da iluminação.
+         Sem specular: uma estrela não tem reflexos brilhantes.
+    ═══════════════════════════════════════════════════════════════ -->
     <group>
         <transform>
             <scale x="4" y="4" z="4" />
         </transform>
         <models>
-            <model file="sphere.3d" />
+            <model file="sphere.3d">
+                <texture file="textures/sun.jpg" />
+                <color>
+                    <diffuse  R="255" G="255" B="255" />
+                    <ambient  R="255" G="255" B="255" />
+                    <specular R="0"   G="0"   B="0"   />
+                    <emissive R="255" G="200" B="100" />
+                    <shininess value="0" />
+                </color>
+            </model>
         </models>
 
-        <!-- Mercúrio: rotação temporal no Y + translação radial => órbita circular simples -->
+        <!-- ───────────────────────────────────────────────────────────
+             MERCÚRIO — planeta rochoso sem atmosfera.
+             Cor acinzentada, sem brilho especular (superfície mate).
+        ─────────────────────────────────────────────────────────────── -->
         <group>
             <transform>
                 <rotate time="10" x="0" y="1" z="0" />
@@ -28,11 +49,23 @@
                 <scale x="0.3" y="0.3" z="0.3" />
             </transform>
             <models>
-                <model file="sphere.3d" />
+                <model file="sphere.3d">
+                    <texture file="textures/mercury.jpg" />
+                    <color>
+                        <diffuse  R="180" G="170" B="160" />
+                        <ambient  R="40"  G="38"  B="35"  />
+                        <specular R="10"  G="10"  B="10"  />
+                        <emissive R="0"   G="0"   B="0"   />
+                        <shininess value="5" />
+                    </color>
+                </model>
             </models>
         </group>
 
-        <!-- Vénus: orbita em 25s -->
+        <!-- ───────────────────────────────────────────────────────────
+             VÉNUS — coberto de nuvens densas e brilhantes.
+             diffuse amarelado, specular moderado (reflexo das nuvens).
+        ─────────────────────────────────────────────────────────────── -->
         <group>
             <transform>
                 <rotate time="25" x="0" y="1" z="0" />
@@ -40,11 +73,23 @@
                 <scale x="0.6" y="0.6" z="0.6" />
             </transform>
             <models>
-                <model file="sphere.3d" />
+                <model file="sphere.3d">
+                    <texture file="textures/venus.jpg" />
+                    <color>
+                        <diffuse  R="220" G="200" B="150" />
+                        <ambient  R="50"  G="45"  B="35"  />
+                        <specular R="80"  G="75"  B="60"  />
+                        <emissive R="0"   G="0"   B="0"   />
+                        <shininess value="30" />
+                    </color>
+                </model>
             </models>
         </group>
 
-        <!-- Terra: mesmo padrão orbital; a Lua é modelada como subgrupo (referencial local da Terra) -->
+        <!-- ───────────────────────────────────────────────────────────
+             TERRA — oceanos com brilho especular (reflexo da água).
+             specular azulado e shininess elevado para simular o mar.
+        ─────────────────────────────────────────────────────────────── -->
         <group>
             <transform>
                 <rotate time="40" x="0" y="1" z="0" />
@@ -52,10 +97,19 @@
                 <scale x="0.7" y="0.7" z="0.7" />
             </transform>
             <models>
-                <model file="sphere.3d" />
+                <model file="sphere.3d">
+                    <texture file="textures/earth.jpg" />
+                    <color>
+                        <diffuse  R="100" G="130" B="200" />
+                        <ambient  R="20"  G="30"  B="50"  />
+                        <specular R="60"  G="80"  B="120" />
+                        <emissive R="0"   G="0"   B="0"   />
+                        <shininess value="60" />
+                    </color>
+                </model>
             </models>
 
-            <!-- Lua: orbita a Terra em 5s -->
+            <!-- LUA — satélite da Terra, superfície rochosa mate -->
             <group>
                 <transform>
                     <rotate time="5" x="0" y="1" z="0" />
@@ -63,12 +117,24 @@
                     <scale x="0.25" y="0.25" z="0.25" />
                 </transform>
                 <models>
-                    <model file="sphere.3d" />
+                    <model file="sphere.3d">
+                        <texture file="textures/moon.jpg" />
+                        <color>
+                            <diffuse  R="160" G="155" B="145" />
+                            <ambient  R="35"  G="34"  B="32"  />
+                            <specular R="10"  G="10"  B="10"  />
+                            <emissive R="0"   G="0"   B="0"   />
+                            <shininess value="5" />
+                        </color>
+                    </model>
                 </models>
             </group>
         </group>
 
-        <!-- Marte: orbita em 80s -->
+        <!-- ───────────────────────────────────────────────────────────
+             MARTE — planeta vermelho com poeira superficial.
+             diffuse avermelhado, pouco especular (superfície pó/rocha).
+        ─────────────────────────────────────────────────────────────── -->
         <group>
             <transform>
                 <rotate time="80" x="0" y="1" z="0" />
@@ -76,10 +142,19 @@
                 <scale x="0.5" y="0.5" z="0.5" />
             </transform>
             <models>
-                <model file="sphere.3d" />
+                <model file="sphere.3d">
+                    <texture file="textures/mars.jpg" />
+                    <color>
+                        <diffuse  R="200" G="100" B="60"  />
+                        <ambient  R="45"  G="22"  B="13"  />
+                        <specular R="15"  G="8"   B="5"   />
+                        <emissive R="0"   G="0"   B="0"   />
+                        <shininess value="8" />
+                    </color>
+                </model>
             </models>
 
-            <!-- Fobos: orbita Marte em 3s -->
+            <!-- FOBOS — lua de Marte, pequena e irregular -->
             <group>
                 <transform>
                     <rotate time="3" x="0" y="1" z="0" />
@@ -87,12 +162,23 @@
                     <scale x="0.15" y="0.15" z="0.15" />
                 </transform>
                 <models>
-                    <model file="sphere.3d" />
+                    <model file="sphere.3d">
+                        <color>
+                            <diffuse  R="130" G="110" B="90"  />
+                            <ambient  R="28"  G="24"  B="20"  />
+                            <specular R="5"   G="5"   B="5"   />
+                            <emissive R="0"   G="0"   B="0"   />
+                            <shininess value="3" />
+                        </color>
+                    </model>
                 </models>
             </group>
         </group>
 
-        <!-- Júpiter: orbita em 200s -->
+        <!-- ───────────────────────────────────────────────────────────
+             JÚPITER — gigante gasoso com bandas coloridas.
+             Superfície de gás: sem brilho especular significativo.
+        ─────────────────────────────────────────────────────────────── -->
         <group>
             <transform>
                 <rotate time="200" x="0" y="1" z="0" />
@@ -100,10 +186,19 @@
                 <scale x="1.5" y="1.5" z="1.5" />
             </transform>
             <models>
-                <model file="sphere.3d" />
+                <model file="sphere.3d">
+                    <texture file="textures/jupiter.jpg" />
+                    <color>
+                        <diffuse  R="210" G="175" B="130" />
+                        <ambient  R="48"  G="40"  B="30"  />
+                        <specular R="20"  G="17"  B="13"  />
+                        <emissive R="0"   G="0"   B="0"   />
+                        <shininess value="10" />
+                    </color>
+                </model>
             </models>
 
-            <!-- Io: orbita Júpiter em 4s -->
+            <!-- IO — lua vulcânica amarela/laranja -->
             <group>
                 <transform>
                     <rotate time="4" x="0" y="1" z="0" />
@@ -111,11 +206,19 @@
                     <scale x="0.2" y="0.2" z="0.2" />
                 </transform>
                 <models>
-                    <model file="sphere.3d" />
+                    <model file="sphere.3d">
+                        <color>
+                            <diffuse  R="220" G="180" B="60"  />
+                            <ambient  R="50"  G="40"  B="14"  />
+                            <specular R="10"  G="8"   B="3"   />
+                            <emissive R="0"   G="0"   B="0"   />
+                            <shininess value="5" />
+                        </color>
+                    </model>
                 </models>
             </group>
 
-            <!-- Europa: orbita Júpiter em 7s -->
+            <!-- EUROPA — lua com superfície de gelo com brilho -->
             <group>
                 <transform>
                     <rotate time="7" x="0" y="1" z="0" />
@@ -123,12 +226,23 @@
                     <scale x="0.18" y="0.18" z="0.18" />
                 </transform>
                 <models>
-                    <model file="sphere.3d" />
+                    <model file="sphere.3d">
+                        <color>
+                            <diffuse  R="200" G="200" B="210" />
+                            <ambient  R="45"  G="45"  B="48"  />
+                            <specular R="100" G="100" B="110" />
+                            <emissive R="0"   G="0"   B="0"   />
+                            <shininess value="80" />
+                        </color>
+                    </model>
                 </models>
             </group>
         </group>
 
-        <!-- Saturno: o planeta e o anel são separados para permitir animações distintas -->
+        <!-- ───────────────────────────────────────────────────────────
+             SATURNO — gigante gasoso com anel icónico.
+             O planeta e o anel são grupos separados para animações distintas.
+        ─────────────────────────────────────────────────────────────── -->
         <group>
             <transform>
                 <rotate time="500" x="0" y="1" z="0" />
@@ -141,23 +255,44 @@
                     <scale x="1.2" y="1.2" z="1.2" />
                 </transform>
                 <models>
-                    <model file="sphere.3d" />
+                    <model file="sphere.3d">
+                        <texture file="textures/saturn.jpg" />
+                        <color>
+                            <diffuse  R="210" G="190" B="140" />
+                            <ambient  R="48"  G="43"  B="32"  />
+                            <specular R="20"  G="18"  B="14"  />
+                            <emissive R="0"   G="0"   B="0"   />
+                            <shininess value="10" />
+                        </color>
+                    </model>
                 </models>
             </group>
 
-            <!-- Anel de Saturno (plano achatado, rotação própria) -->
+            <!-- Anel de Saturno — plano achatado com textura dos anéis -->
             <group>
                 <transform>
                     <rotate time="300" x="0" y="1" z="0" />
                     <scale x="3.5" y="0.05" z="3.5" />
                 </transform>
                 <models>
-                    <model file="plane.3d" />
+                    <model file="plane.3d">
+                        <texture file="textures/saturn_ring.png" />
+                        <color>
+                            <diffuse  R="200" G="180" B="140" />
+                            <ambient  R="45"  G="40"  B="32"  />
+                            <specular R="10"  G="9"   B="7"   />
+                            <emissive R="0"   G="0"   B="0"   />
+                            <shininess value="5" />
+                        </color>
+                    </model>
                 </models>
             </group>
         </group>
 
-        <!-- Urano: orbita em 900s -->
+        <!-- ───────────────────────────────────────────────────────────
+             URANO — gigante de gelo com tom azul-esverdeado.
+             Atmosfera de metano: cor característica e pouco brilho.
+        ─────────────────────────────────────────────────────────────── -->
         <group>
             <transform>
                 <rotate time="900" x="0" y="1" z="0" />
@@ -165,11 +300,23 @@
                 <scale x="0.9" y="0.9" z="0.9" />
             </transform>
             <models>
-                <model file="sphere.3d" />
+                <model file="sphere.3d">
+                    <texture file="textures/uranus.jpg" />
+                    <color>
+                        <diffuse  R="150" G="210" B="210" />
+                        <ambient  R="34"  G="48"  B="48"  />
+                        <specular R="40"  G="55"  B="55"  />
+                        <emissive R="0"   G="0"   B="0"   />
+                        <shininess value="20" />
+                    </color>
+                </model>
             </models>
         </group>
 
-        <!-- Netuno: orbita em 1400s -->
+        <!-- ───────────────────────────────────────────────────────────
+             NETUNO — gigante de gelo azul profundo.
+             Tom mais azulado que Urano, ventos supersónicos.
+        ─────────────────────────────────────────────────────────────── -->
         <group>
             <transform>
                 <rotate time="1400" x="0" y="1" z="0" />
@@ -177,45 +324,55 @@
                 <scale x="0.85" y="0.85" z="0.85" />
             </transform>
             <models>
-                <model file="sphere.3d" />
+                <model file="sphere.3d">
+                    <texture file="textures/neptune.jpg" />
+                    <color>
+                        <diffuse  R="60"  G="100" B="200" />
+                        <ambient  R="14"  G="23"  B="46"  />
+                        <specular R="30"  G="50"  B="100" />
+                        <emissive R="0"   G="0"   B="0"   />
+                        <shininess value="25" />
+                    </color>
+                </model>
             </models>
         </group>
 
     </group>
 
-        <!-- ══════════════════════════════════════════════════════════════════════
-         COMETA — segue uma curva Catmull-Rom elíptica inclinada.
-         O modelo é gerado com: ./generator bezier teapot.patch 10 comet.3d
-         O cometa alinha-se automaticamente à tangente da curva (align="True").
-            Nota: os primeiros/últimos pontos repetidos ajudam a fechar o percurso
-            e a suavizar a transição entre o fim e o início do ciclo.
-         ══════════════════════════════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════════════════════
+         COMETA — percorre uma curva Catmull-Rom elíptica inclinada.
+         Gerado com: ./generator bezier teapot.patch 10 comet.3d
+         align="True": o modelo aponta sempre na direção do movimento.
+    ═══════════════════════════════════════════════════════════════ -->
     <group>
         <transform>
             <translate time="30" align="True">
-                <point x="0"    y="5"   z="50"  />
-                <point x="35"   y="8"   z="35"  />
-                <point x="50"   y="5"   z="0"   />
-                <point x="35"   y="2"   z="-35" />
-                <point x="0"    y="5"   z="-50" />
-                <point x="-35"  y="8"   z="-35" />
-                <point x="-50"  y="5"   z="0"   />
-                <point x="-35"  y="2"   z="35"  />
-                <point x="0"    y="5"   z="50"  />
-                <point x="35"   y="8"   z="35"  />
-                <point x="50"   y="5"   z="0"   />
-                <point x="35"   y="2"   z="-35" />
+                <point x="0"   y="5"  z="50"  />
+                <point x="35"  y="8"  z="35"  />
+                <point x="50"  y="5"  z="0"   />
+                <point x="35"  y="2"  z="-35" />
+                <point x="0"   y="5"  z="-50" />
+                <point x="-35" y="8"  z="-35" />
+                <point x="-50" y="5"  z="0"   />
+                <point x="-35" y="2"  z="35"  />
+                <point x="0"   y="5"  z="50"  />
+                <point x="35"  y="8"  z="35"  />
+                <point x="50"  y="5"  z="0"   />
+                <point x="35"  y="2"  z="-35" />
             </translate>
             <scale x="0.5" y="0.5" z="0.5" />
         </transform>
         <models>
-            <model file="comet.3d" />
+            <model file="comet.3d">
+                <color>
+                    <diffuse  R="180" G="180" B="200" />
+                    <ambient  R="40"  G="40"  B="45"  />
+                    <specular R="60"  G="60"  B="80"  />
+                    <emissive R="20"  G="20"  B="30"  />
+                    <shininess value="15" />
+                </color>
+            </model>
         </models>
     </group>
 
 </world>
-
-<!--os planetas interiores seguem a escala 
-proporcional real com a Terra a 40s de referência, 
-e os exteriores foram comprimidos para que a animação 
-seja observável em tempo de demonstração-->

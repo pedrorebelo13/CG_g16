@@ -7,10 +7,10 @@
 #include <math.h>
 #include <GL/glut.h>
 
-// stb_image: carregamento de JPG/PNG sem dependências externas.
-// A macro STB_IMAGE_IMPLEMENTATION deve estar definida num único .cpp.
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+// DevIL: biblioteca de carregamento de imagens usada na UC de CG.
+
+
+#include <IL/il.h>
 
 #include "tinyxml2.h"
 #include "camera.h"
@@ -164,35 +164,59 @@ GLuint loadTexture(const string& filename){
     auto it=textureCache.find(filename);
     if(it!=textureCache.end()) return it->second;
 
-    int w,h,channels;
-    // stbi_load carrega JPG/PNG/BMP com req_comp=4 → sempre RGBA
-    unsigned char* data=stbi_load(filename.c_str(),&w,&h,&channels,4);
-    if(!data){
+    // Carregamento com DevIL — abordagem usada na UC de CG (guião PL11)
+    unsigned int ilImg;
+    unsigned int tw, th;
+    unsigned char* texData;
+    GLuint texID;
+
+    // Iniciar o DevIL (idempotente — pode ser chamado várias vezes)
+    ilInit();
+
+    // Colocar a origem da textura no canto inferior esquerdo,
+    // para que (0,0) corresponda ao canto inferior esquerdo da imagem
+    ilEnable(IL_ORIGIN_SET);
+    ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+
+    // Carregar a imagem para memória com DevIL
+    ilGenImages(1, &ilImg);
+    ilBindImage(ilImg);
+    ilLoadImage((ILstring)filename.c_str());
+
+    tw = ilGetInteger(IL_IMAGE_WIDTH);
+    th = ilGetInteger(IL_IMAGE_HEIGHT);
+
+    if(tw == 0 || th == 0){
         cerr<<"Erro ao carregar textura: "<<filename<<endl;
+        ilDeleteImages(1, &ilImg);
         return 0;
     }
 
-    GLuint id;
-    glGenTextures(1,&id);
-    glBindTexture(GL_TEXTURE_2D,id);
+    // Converter para RGBA com 1 byte por componente (0-255)
+    ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+    texData = ilGetData();
 
-    // Filtros de magnificação e minificação
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-    // Repetição: permite texturas que cobrem objetos maiores que [0,1]
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    // Criar a textura OpenGL e enviar os dados para a GPU
+    glGenTextures(1, &texID);
+    glBindTexture(GL_TEXTURE_2D, texID);
 
-    // Envia a imagem para a GPU e gera mipmaps automaticamente
-    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,w,h,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,     GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,     GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+    // Upload dos dados de imagem para a GPU
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tw, th, 0,
+                 GL_RGBA, GL_UNSIGNED_BYTE, texData);
     glGenerateMipmap(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
-    stbi_image_free(data);
-    glBindTexture(GL_TEXTURE_2D,0);
+    // Libertar a imagem da memória DevIL
+    ilDeleteImages(1, &ilImg);
 
-    textureCache[filename]=id;
-    cout<<"Textura carregada: "<<filename<<" ("<<w<<"x"<<h<<")"<<endl;
-    return id;
+    textureCache[filename] = texID;
+    cout<<"Textura carregada: "<<filename<<" ("<<tw<<"x"<<th<<")"<<endl;
+    return texID;
 }
 
 
@@ -525,6 +549,11 @@ int main(int argc,char** argv){
     glutReshapeFunc(changeSize);
     glutKeyboardFunc(processKeys);
     glutSpecialFunc(processSpecialKeys);
+
+    // Inicializar DevIL para carregamento de texturas
+    ilInit();
+    ilEnable(IL_ORIGIN_SET);
+    ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
