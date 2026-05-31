@@ -27,7 +27,7 @@
         </transform>
         <models>
             <model file="sphere.3d">
-                <texture file="textures/sun.jpg" />
+                <texture file="textures/2k_sun.jpg" />
                 <color>
                     <diffuse  R="255" G="255" B="255" />
                     <ambient  R="255" G="255" B="255" />
@@ -50,7 +50,7 @@
             </transform>
             <models>
                 <model file="sphere.3d">
-                    <texture file="textures/mercury.jpg" />
+                    <texture file="textures/2k_mercury.jpg" />
                     <color>
                         <diffuse  R="180" G="170" B="160" />
                         <ambient  R="40"  G="38"  B="35"  />
@@ -74,7 +74,7 @@
             </transform>
             <models>
                 <model file="sphere.3d">
-                    <texture file="textures/venus.jpg" />
+                    <texture file="textures/2k_venus_surface.jpg" />
                     <color>
                         <diffuse  R="220" G="200" B="150" />
                         <ambient  R="50"  G="45"  B="35"  />
@@ -98,7 +98,7 @@
             </transform>
             <models>
                 <model file="sphere.3d">
-                    <texture file="textures/earth.jpg" />
+                    <texture file="textures/2k_earth_daymap.jpg" />
                     <color>
                         <diffuse  R="100" G="130" B="200" />
                         <ambient  R="20"  G="30"  B="50"  />
@@ -118,7 +118,7 @@
                 </transform>
                 <models>
                     <model file="sphere.3d">
-                        <texture file="textures/moon.jpg" />
+                        <texture file="textures/2k_moon.jpg" />
                         <color>
                             <diffuse  R="160" G="155" B="145" />
                             <ambient  R="35"  G="34"  B="32"  />
@@ -143,7 +143,7 @@
             </transform>
             <models>
                 <model file="sphere.3d">
-                    <texture file="textures/mars.jpg" />
+                    <texture file="textures/2k_mars.jpg" />
                     <color>
                         <diffuse  R="200" G="100" B="60"  />
                         <ambient  R="45"  G="22"  B="13"  />
@@ -187,7 +187,7 @@
             </transform>
             <models>
                 <model file="sphere.3d">
-                    <texture file="textures/jupiter.jpg" />
+                    <texture file="textures/2k_jupiter.jpg" />
                     <color>
                         <diffuse  R="210" G="175" B="130" />
                         <ambient  R="48"  G="40"  B="30"  />
@@ -256,7 +256,7 @@
                 </transform>
                 <models>
                     <model file="sphere.3d">
-                        <texture file="textures/saturn.jpg" />
+                        <texture file="textures/2k_saturn.jpg" />
                         <color>
                             <diffuse  R="210" G="190" B="140" />
                             <ambient  R="48"  G="43"  B="32"  />
@@ -276,7 +276,7 @@
                 </transform>
                 <models>
                     <model file="plane.3d">
-                        <texture file="textures/saturn_ring.png" />
+                        <texture file="textures/2k_saturn_ring_alpha.png" />
                         <color>
                             <diffuse  R="200" G="180" B="140" />
                             <ambient  R="45"  G="40"  B="32"  />
@@ -301,7 +301,7 @@
             </transform>
             <models>
                 <model file="sphere.3d">
-                    <texture file="textures/uranus.jpg" />
+                    <texture file="textures/2k_uranus.jpg" />
                     <color>
                         <diffuse  R="150" G="210" B="210" />
                         <ambient  R="34"  G="48"  B="48"  />
@@ -325,7 +325,7 @@
             </transform>
             <models>
                 <model file="sphere.3d">
-                    <texture file="textures/neptune.jpg" />
+                    <texture file="textures/2k_neptune.jpg" />
                     <color>
                         <diffuse  R="60"  G="100" B="200" />
                         <ambient  R="14"  G="23"  B="46"  />
