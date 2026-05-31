@@ -8,13 +8,19 @@
 #include <GL/glut.h>
 
 // DevIL: biblioteca de carregamento de imagens usada na UC de CG.
-
-
 #include <IL/il.h>
 
 #include "tinyxml2.h"
 #include "camera.h"
 #include "parser.h"
+
+// Declarations das funções de VBO que podem não estar disponíveis
+extern "C" {
+    void glGenBuffers(GLsizei, GLuint *);
+    void glBindBuffer(GLenum, GLuint);
+    void glBufferData(GLenum, GLsizeiptr, const void *, GLenum);
+    void glGenerateMipmap(GLenum);
+}
 
 using namespace std;
 using namespace tinyxml2;
@@ -65,7 +71,7 @@ struct ModelData {
 Window  gWindow;
 Camera* camera;
 Group   sceneRootGroup;
-map<string, ModelData> modelDataMap;
+map<string, ModelData> modelDataMap;                  // chave: modelFile + "|" + texFile
 map<string, GLuint>    textureCache;  // evita carregar a mesma imagem 2x
 
 bool showAxes     = false;
@@ -181,14 +187,18 @@ GLuint loadTexture(const string& filename){
     // Carregar a imagem para memória com DevIL
     ilGenImages(1, &ilImg);
     ilBindImage(ilImg);
+    
+    cerr<<"DEBUG: Tentando carregar textura: "<<filename<<endl;
     ilLoadImage((ILstring)filename.c_str());
 
     tw = ilGetInteger(IL_IMAGE_WIDTH);
     th = ilGetInteger(IL_IMAGE_HEIGHT);
 
     if(tw == 0 || th == 0){
-        cerr<<"Erro ao carregar textura: "<<filename<<endl;
+        ILenum err = ilGetError();
+        cerr<<"Erro ao carregar textura: "<<filename<<" (erro DevIL: "<<err<<")"<<endl;
         ilDeleteImages(1, &ilImg);
+        textureCache[filename] = 0;
         return 0;
     }
 
@@ -389,6 +399,8 @@ void drawModel(const ModelData& md, const Model& modelInfo){
     if(hasTexture){
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,md.textureId);
+        // Garante que a textura é modulada com iluminação
+        glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     }
 
     // Liga VBO e define os 3 pointers com o mesmo stride de 8 floats
@@ -458,7 +470,9 @@ void renderGroup(const Group& group){
     glPushMatrix();
     for(const Transformation& tr:group.transformations) applyTransformation(tr);
     for(const Model& model:group.models){
-        auto it=modelDataMap.find(model.filename);
+        // Chave única para cada combinação de modelo + textura
+        string key = model.filename + "|" + model.textureFile;
+        auto it=modelDataMap.find(key);
         if(it!=modelDataMap.end())
             drawModel(it->second, model);
     }
@@ -505,23 +519,33 @@ void renderScene(){
     glutPostRedisplay();
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Third Person Orbital Camera - Controles de tecla comum
+// Permite rotação orbital em torno do centro da cena (lookAt) utilizando
+// coordenadas esféricas: alpha (azimute), beta (elevação), radius (distância)
+// ─────────────────────────────────────────────────────────────────────────────
 void processKeys(unsigned char key,int xx,int yy){
     switch(key){
         case 'a':case 'A':showAxes=!showAxes;break;
         case 'l':case 'L':wireframeMode=!wireframeMode;break;
-        case 'w':case 'W':camera->zoomIn();break;
-        case 's':case 'S':camera->zoomOut();break;
+        case 'w':case 'W':camera->zoomIn();break;   // Aproximar (zoom in)
+        case 's':case 'S':camera->zoomOut();break;  // Afastar (zoom out)
         case 27:exit(0);
     }
     glutPostRedisplay();
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Third Person Orbital Camera - Controles de setas
+// Setas permitiem rotação orbital em torno da cena
+// UP/DOWN: rotação vertical (beta), LEFT/RIGHT: rotação horizontal (alpha)
+// ─────────────────────────────────────────────────────────────────────────────
 void processSpecialKeys(int key,int xx,int yy){
     switch(key){
-        case GLUT_KEY_UP:   camera->rotateUp();break;
-        case GLUT_KEY_DOWN: camera->rotateDown();break;
-        case GLUT_KEY_LEFT: camera->rotateLeft();break;
-        case GLUT_KEY_RIGHT:camera->rotateRight();break;
+        case GLUT_KEY_UP:   camera->rotateUp();break;    // Rodar câmara para cima
+        case GLUT_KEY_DOWN: camera->rotateDown();break;  // Rodar câmara para baixo
+        case GLUT_KEY_LEFT: camera->rotateLeft();break;  // Rodar câmara para esquerda
+        case GLUT_KEY_RIGHT:camera->rotateRight();break; // Rodar câmara para direita
     }
     glutPostRedisplay();
 }
@@ -566,22 +590,38 @@ int main(int argc,char** argv){
     // Normaliza normais automaticamente (necessário quando scale != 1)
     glEnable(GL_NORMALIZE);
 
+    // Configuração de textura: modula a cor da textura com a iluminação
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
     // Carrega modelos e texturas após glutCreateWindow
     vector<pair<string,string>> modelRefs;
     collectModelRefs(sceneRootGroup,modelRefs);
 
     for(auto& [modelFile,texFile]:modelRefs){
-        if(modelDataMap.count(modelFile)) continue;
+        // Chave única para cada combinação de modelo + textura
+        string key = modelFile + "|" + texFile;
+        if(modelDataMap.count(key)) continue;
+        
         ModelData md;
         string mpath=resolveModelPath(modelFile,argv[1]);
         if(loadModel(md,mpath,texFile,argv[1]))
-            modelDataMap[modelFile]=md;
+            modelDataMap[key]=md;
         else
             cerr<<"Aviso: falha ao carregar: "<<modelFile<<endl;
     }
 
-    cout<<"\n=== Engine Fase 4 ===\n"
-        <<"Setas: rodar camara | W/S: zoom | A: eixos | L: wireframe | ESC: sair\n";
+    cout<<"\n╔═══════════════════════════════════════════════════════════╗\n"
+        <<"║           ENGINE FASE 4 - THIRD PERSON ORBITAL CAMERA      ║\n"
+        <<"╠═══════════════════════════════════════════════════════════╣\n"
+        <<"║  CAMERA ORBITAL (Esféricas):                               ║\n"
+        <<"║    ↑/↓ : Rotar vertical (beta)                             ║\n"
+        <<"║    ←/→ : Rotar horizontal (azimute)                        ║\n"
+        <<"║    W/S : Zoom in/out (distance)                            ║\n"
+        <<"║  UI:                                                       ║\n"
+        <<"║    A   : Toggle eixos 3D                                   ║\n"
+        <<"║    L   : Toggle wireframe                                  ║\n"
+        <<"║    ESC : Exit                                              ║\n"
+        <<"╚═══════════════════════════════════════════════════════════╝\n";
 
     glutMainLoop();
     delete camera;
