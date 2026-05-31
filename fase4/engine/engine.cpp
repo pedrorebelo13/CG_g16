@@ -20,6 +20,8 @@ extern "C" {
     void glBindBuffer(GLenum, GLuint);
     void glBufferData(GLenum, GLsizeiptr, const void *, GLenum);
     void glGenerateMipmap(GLenum);
+    void glDeleteBuffers(GLsizei, const GLuint *);
+    void glDeleteTextures(GLsizei, const GLuint *);
 }
 
 using namespace std;
@@ -598,11 +600,8 @@ int main(int argc,char** argv){
     glutInitWindowSize(gWindow.width,gWindow.height);
     glutCreateWindow("Engine 3D - Fase 4");
 
-    // Registar limpeza de recursos: preferir glutCloseFunc (freeglut) se disponível,
-    // e registar também a função com atexit como fallback.
-#ifdef FREEGLUT
-    glutCloseFunc(cleanupGLResources);
-#endif
+    
+
     atexit(cleanupGLResources);
 
     glutDisplayFunc(renderScene);
