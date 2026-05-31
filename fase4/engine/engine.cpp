@@ -77,6 +77,35 @@ map<string, GLuint>    textureCache;  // evita carregar a mesma imagem 2x
 bool showAxes     = false;
 bool wireframeMode= false;
 
+// Função para limpar recursos OpenGL (VBOs/EBOs/texturas).
+// Deve ser chamada enquanto existir um contexto OpenGL válido.
+void cleanupGLResources(){
+    for(auto& entry : modelDataMap){
+        ModelData& md = entry.second;
+        if(md.vboId!=0){
+            glDeleteBuffers(1, &md.vboId);
+            md.vboId = 0;
+        }
+        if(md.eboId!=0){
+            glDeleteBuffers(1, &md.eboId);
+            md.eboId = 0;
+        }
+        if(md.textureId!=0){
+            glDeleteTextures(1, &md.textureId);
+            md.textureId = 0;
+        }
+    }
+
+    for(auto& entry : textureCache){
+        if(entry.second!=0){
+            glDeleteTextures(1, &entry.second);
+            entry.second = 0;
+        }
+    }
+    modelDataMap.clear();
+    textureCache.clear();
+}
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Catmull-Rom (inalterado da Fase 3)
@@ -568,6 +597,13 @@ int main(int argc,char** argv){
     glutInitWindowPosition(100,100);
     glutInitWindowSize(gWindow.width,gWindow.height);
     glutCreateWindow("Engine 3D - Fase 4");
+
+    // Registar limpeza de recursos: preferir glutCloseFunc (freeglut) se disponível,
+    // e registar também a função com atexit como fallback.
+#ifdef FREEGLUT
+    glutCloseFunc(cleanupGLResources);
+#endif
+    atexit(cleanupGLResources);
 
     glutDisplayFunc(renderScene);
     glutReshapeFunc(changeSize);

@@ -5,6 +5,15 @@
 #include "camera.h"
 #include "tinyxml2.h"
 
+/**
+ * @file parser.h
+ * @brief Parser XML da cena (Fase 4) — materiais, texturas, luzes e transformações.
+ *
+ * Contém as estruturas de dados usadas pelo engine e a classe `SimpleParser`
+ * que converte um ficheiro XML de cena numa estrutura `Group` usada pelo
+ * renderer. Os comentários Doxygen aqui documentam a API mínima para uso
+ * por outras partes do código.
+ */
 // ─────────────────────────────────────────────────────────────────────────────
 // Estruturas de dados base (inalteradas da Fase 3)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -117,16 +126,31 @@ struct Group {
 // ─────────────────────────────────────────────────────────────────────────────
 class SimpleParser {
 public:
+    /**
+     * @brief Faz parse do ficheiro XML de cena e preenche estruturas.
+     * @param filename Caminho para o ficheiro XML.
+     * @param window Saída com dimensões da janela.
+     * @param camera Saída com parâmetros de câmara.
+     * @param rootGroup Saída com a hierarquia de grupos, modelos e luzes.
+     * @return true em sucesso, false se ocorrer um erro ao abrir/parsear.
+     *
+     * Esta função é o ponto de entrada do parser: valida o XML, lê a
+     * secção `<lights>` e a hierarquia de `<group>` e devolve a cena
+     * completa pronta a ser consumida pelo renderer.
+     */
     static bool parseXMLFile(const std::string& filename,
                              Window& window,
                              Camera& camera,
                              Group& rootGroup);
 private:
+    /** @name Funções auxiliares do parser (uso interno) */
+    /**@{*/
     static void parseWindow(tinyxml2::XMLElement* el, Window& w);
     static void parseCamera(tinyxml2::XMLElement* el, Camera& c);
     static Group parseGroup(tinyxml2::XMLElement* el);
     static void parseTransforms(tinyxml2::XMLElement* el, Group& g);
     static void parseModels(tinyxml2::XMLElement* el, Group& g);
-    static void parseLights(tinyxml2::XMLElement* el, Group& g);   // novo
-    static Material parseMaterial(tinyxml2::XMLElement* modelEl);  // novo
+    static void parseLights(tinyxml2::XMLElement* el, Group& g);
+    static Material parseMaterial(tinyxml2::XMLElement* modelEl);
+    /**@}*/
 };
